@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk ASCII Camera</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <h1 class="title">CYBERPUNK ASCII CAMERA</h1>
+
+    <section class="controls-panel" aria-label="ASCII controls">
+      <div class="control-group">
+        <label for="modeSelect">ASCII Mode</label>
+        <select id="modeSelect" aria-label="ASCII mode selector">
+          <option value="normal">Normal</option>
+          <option value="binary">Binary</option>
+          <option value="cyberpunk">Cyberpunk</option>
+          <option value="portrait">Portrait Glitch</option>
+        </select>
+      </div>
+
+      <div class="control-group">
+        <label for="brightnessRange">Brightness <span id="brightnessValue">0</span></label>
+        <input id="brightnessRange" type="range" min="-100" max="100" value="0">
+      </div>
+
+      <div class="control-group">
+        <label for="contrastRange">Contrast <span id="contrastValue">0</span></label>
+        <input id="contrastRange" type="range" min="-100" max="100" value="0">
+      </div>
+
+      <div class="control-group">
+        <span>Color Theme</span>
+        <div class="button-row" role="group" aria-label="Color theme selector">
+          <button class="theme-btn active" data-color="#00ff9f" type="button">Neon Green</button>
+          <button class="theme-btn" data-color="#bc13fe" type="button">Neon Purple</button>
+          <button class="theme-btn" data-color="#ff073a" type="button">Neon Red</button>
+        </div>
+      </div>
+
+      <div class="control-group actions">
+        <button id="downloadBtn" type="button">Download ASCII</button>
+        <button id="startRecordBtn" type="button">Start Recording</button>
+        <button id="stopRecordBtn" type="button" disabled>Stop Recording</button>
+      </div>
+    </section>
+
+    <section class="ascii-stage" aria-live="polite">
+      <pre id="asciiOutput"></pre>
+    </section>
+
+    <p id="statusText" class="status-text">Initializing camera...</p>
+
+    <video id="cameraFeed" autoplay playsinline muted></video>
+    <canvas id="sourceCanvas"></canvas>
+    <canvas id="recordCanvas"></canvas>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

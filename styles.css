@@ -1,0 +1,168 @@
+:root {
+  --bg: #000000;
+  --panel: rgba(0, 0, 0, 0.82);
+  --edge: rgba(0, 255, 159, 0.42);
+  --text: #00ff9f;
+  --glow-soft: color-mix(in srgb, var(--text) 26%, transparent);
+  --glow-hard: color-mix(in srgb, var(--text) 14%, transparent);
+  --muted: #89ffd1;
+  --font: "Courier New", "Lucida Console", "Consolas", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 255, 159, 0.11), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(188, 19, 254, 0.1), transparent 40%),
+    linear-gradient(145deg, #010101 0%, #050505 55%, #000000 100%);
+  color: var(--text);
+  font-family: var(--font);
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.app-shell {
+  width: min(1200px, 100%);
+  display: grid;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.title {
+  margin: 0;
+  letter-spacing: 0.2rem;
+  font-size: clamp(1.1rem, 2vw, 1.8rem);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--text) 80%, transparent);
+}
+
+.controls-panel {
+  width: min(1100px, 100%);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow:
+    0 0 20px rgba(0, 255, 159, 0.18),
+    inset 0 0 12px rgba(0, 255, 159, 0.07);
+  padding: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.9rem;
+}
+
+.control-group {
+  display: grid;
+  gap: 0.45rem;
+}
+
+label,
+span {
+  font-size: 0.83rem;
+  color: var(--muted);
+}
+
+select,
+input[type="range"],
+button {
+  width: 100%;
+  font-family: var(--font);
+}
+
+select,
+button {
+  border: 1px solid var(--edge);
+  background: #010101;
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.5rem 0.55rem;
+}
+
+button {
+  cursor: pointer;
+  transition: box-shadow 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+button:hover:enabled {
+  border-color: var(--text);
+  box-shadow: 0 0 14px rgba(0, 255, 159, 0.36);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.button-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+}
+
+.theme-btn.active {
+  border-color: var(--text);
+  box-shadow: 0 0 15px color-mix(in srgb, var(--text) 65%, transparent);
+}
+
+.actions {
+  align-content: end;
+}
+
+.ascii-stage {
+  width: min(1100px, 100%);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  background: #000000;
+  padding: 0.75rem;
+  overflow: auto;
+  box-shadow:
+    0 0 20px rgba(0, 255, 159, 0.2),
+    inset 0 0 24px rgba(0, 255, 159, 0.08);
+}
+
+#asciiOutput {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(0.28rem, 0.84vw, 0.8rem);
+  line-height: 0.92;
+  letter-spacing: 0.03rem;
+  white-space: pre;
+  min-height: 58vh;
+  filter: contrast(1.08);
+  text-shadow:
+    0 0 2px var(--glow-soft),
+    0 0 6px var(--glow-hard);
+}
+
+.status-text {
+  margin: 0;
+  min-height: 1.3rem;
+  color: var(--muted);
+  font-size: 0.83rem;
+}
+
+#cameraFeed,
+#sourceCanvas,
+#recordCanvas {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 700px) {
+  .controls-panel {
+    grid-template-columns: 1fr;
+  }
+
+  #asciiOutput {
+    min-height: 52vh;
+    font-size: clamp(0.24rem, 1.5vw, 0.55rem);
+  }
+}
